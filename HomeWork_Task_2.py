@@ -1,5 +1,5 @@
 """Please don't user builtins for naming
-   'str', 'list', 'dict', 'set' etc. deprecated.
+   'str', 'list', 'dict', 'set' etc.
    Always and your code files with new line.
 """
 str = '((((((((((((((2, 3)))))))))))))'
