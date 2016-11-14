@@ -1,5 +1,6 @@
 # Card game 21
 import random
+import os
 selected_cards_check = []
 
 
@@ -74,14 +75,70 @@ def sum_cards(sum):
     return x
 
 
-PlayerCards = select_cards()
-CompCards = select_cards()
-Test = sum_cards(PlayerCards)
+score = [0, 0]
+choise = None
 
-print(take_a_card())
-print(PlayerCards)
-print(Test)
-print(CompCards)
-print(selected_cards_check)
-
-input()
+while choise != 2:
+    print('''
+        1 - Начать игру
+        2 - Выйти
+        ''')
+    choise = int(input('Ваш выбор: '))
+    if choise == 1:
+        os.system('cls')
+        PlayerCards = select_cards()
+        CompCards = select_cards()
+        print('Score player: ', score[0], 'comp: ', score[1])
+        print('\n\nYou have this cards : ', PlayerCards,
+              '\nHis sum = ', sum_cards(PlayerCards))
+        x = input('\n\nTake more cards yes/no? : ')
+        while x == 'yes':
+            os.system('cls')
+            PlayerCards.append(take_a_card())
+            print('Score player: ', score[0], 'comp: ', score[1])
+            print('\n\nYou have this cards : ', PlayerCards,
+                  '\nHis sum = ', sum_cards(PlayerCards))
+            if sum_cards(PlayerCards) == 21:
+                score[0] += 1
+                os.system('cls')
+                print('\nYou WIN!')
+                print('\nScore player: ', score[0], 'comp: ', score[1])
+                break
+            elif sum_cards(PlayerCards) >= 21:
+                score[1] += 1
+                os.system('cls')
+                print('\nYou loss!')
+                print('\nScore player: ', score[0], 'comp: ', score[1])
+                break
+            CompCards.append(take_a_card())
+            if sum_cards(CompCards) == 21:
+                score[1] += 1
+                os.system('cls')
+                print('\nComputer Win!')
+                print('\nScore player: ', score[0], 'comp: ', score[1])
+                break
+            elif sum_cards(PlayerCards) >= 21:
+                score[0] += 1
+                os.system('cls')
+                print('\nComputer loss!')
+                print('\nScore player: ', score[0], 'comp: ', score[1])
+                break
+            x = input('\n\nTake more cards yes/no? : ')
+        else:
+            if sum_cards(PlayerCards) > sum_cards(CompCards):
+                score[0] += 1
+                os.system('cls')
+                print('\nYou Win')
+                print('\nScore player: ', score[0], 'comp: ', score[1])
+            elif sum_cards(PlayerCards) < sum_cards(CompCards):
+                score[1] += 1
+                os.system('cls')
+                print('\nComp Win')
+                print('\nScore player: ', score[0], 'comp: ', score[1])
+            elif sum_cards(PlayerCards) == sum_cards(CompCards):
+                os.system('cls')
+                print('\nDraw!!!')
+    if choise == 2:
+        print('До свидания!')
+        print('\a')
+        input('\nPress \'Enter\' for exit!')
