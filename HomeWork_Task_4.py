@@ -104,7 +104,7 @@ while choise != 2:
                 print('\nYou WIN!')
                 print('\nScore player: ', score[0], 'comp: ', score[1])
                 break
-            elif sum_cards(PlayerCards) >= 21:
+            elif sum_cards(PlayerCards) > 21:
                 score[1] += 1
                 os.system('cls')
                 print('\nYou loss!')
@@ -117,7 +117,7 @@ while choise != 2:
                 print('\nComputer Win!')
                 print('\nScore player: ', score[0], 'comp: ', score[1])
                 break
-            elif sum_cards(PlayerCards) >= 21:
+            elif sum_cards(PlayerCards) > 21:
                 score[0] += 1
                 os.system('cls')
                 print('\nComputer loss!')
