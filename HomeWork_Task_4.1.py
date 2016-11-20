@@ -1,6 +1,6 @@
 # Card game 21
 import random
-# import os
+import os
 
 x = ['2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', '10C',
      'JC', 'QC', 'KC', 'AC',
@@ -17,6 +17,7 @@ class Deck(object):
     def __init__(self, deck, selected_cards_check=[]):
         self.deck_cards = deck
         self.selected_cards_check = selected_cards_check
+        self.x = x
 
     def choose_cards(self):
         x = 2
@@ -64,14 +65,115 @@ class Deck(object):
         return x
 
 
+def main():
+    score = [0, 0]
+    choise = None
+    while choise != 2:
+        print('''
+            1 - Start Game.
+            2 - Exit.
+            ''')
+        choise = int(input('Your choice : '))
+        if choise == 1:
+            PlayerCards = []
+            CompCards = []
+            PlayerCards = y.choose_cards()
+            CompCards = y.choose_cards()
+            sumP = Deck(PlayerCards)
+            sumC = Deck(CompCards)
+            os.system('cls')
+            print('Score player: ', score[0], 'comp: ', score[1])
+            print('\n\nYou have this cards : ', PlayerCards,
+                  '\nHis sum = ', sumP.sum_cards())
+            Take_Card = input('\n\nTake more cards yes/no? : ')
+            while Take_Card == 'yes':
+                os.system('cls')
+                PlayerCards.append(y.add_cards())
+                sumP = Deck(PlayerCards)
+                print('Score player: ', score[0], 'comp: ', score[1])
+                print('\n\nYou have this cards : ', PlayerCards,
+                      '\nHis sum = ', sumP.sum_cards())
+                if sumP.sum_cards() == 21:
+                    score[0] += 1
+                    os.system('cls')
+                    print('\nYou WIN!')
+                    print('\nScore player: ', score[0], 'comp: ', score[1])
+                    break
+                if sumP.sum_cards() > 21:
+                    score[1] += 1
+                    os.system('cls')
+                    print('\nYou loss!')
+                    print('\nScore player: ', score[0], 'comp: ', score[1])
+                    break
+                if sumC.sum_cards() < 19:
+                    CompCards.append(y.add_cards())
+                    sumC = Deck(CompCards)
+                    if sumC.sum_cards() == 21:
+                        score[1] += 1
+                        os.system('cls')
+                        print('\nComp WIN!')
+                        print('\nComputer have this cards : ', CompCards)
+                        print('\nScore player: ', score[0], 'comp: ', score[1])
+                        break
+                    if sumC.sum_cards() > 21:
+                        score[0] += 1
+                        os.system('cls')
+                        print('\nComp loss!')
+                        print('\nComputer have this cards : ', CompCards)
+                        print('\nScore player: ', score[0], 'comp: ', score[1])
+                        break
+                Take_Card = input('\n\nTake more cards yes/no? : ')
+            else:
+                while sumC.sum_cards() < 19:
+                    CompCards.append(y.add_cards())
+                    sumC = Deck(CompCards)
+                    if sumC.sum_cards() == 21:
+                        score[1] += 1
+                        os.system('cls')
+                        print('\nComp WIN!')
+                        print('\nComputer have this cards : ', CompCards)
+                        print('\nScore player: ', score[0], 'comp: ', score[1])
+                        break
+                    if sumC.sum_cards() > 21:
+                        score[0] += 1
+                        os.system('cls')
+                        print('\nComp loss!')
+                        print('\nComputer have this cards : ', CompCards)
+                        print('\nScore player: ', score[0], 'comp: ', score[1])
+                        break
+                if sumP.sum_cards() <= 21 and sumC.sum_cards() <= 21:
+                    if sumP.sum_cards() > sumC.sum_cards():
+                        score[0] += 1
+                        os.system('cls')
+                        print('\nYou Win')
+                        print('\nScore player: ', score[0], 'comp: ', score[1])
+                    elif sumP.sum_cards() < sumC.sum_cards():
+                        score[1] += 1
+                        os.system('cls')
+                        print('\nComp Win')
+                        print('\nComputer have this cards : ', CompCards)
+                        print('\nScore player: ', score[0], 'comp: ', score[1])
+                    elif sumP.sum_cards() == sumC.sum_cards():
+                        os.system('cls')
+                        print('\nDraw!!!')
+        if choise == 2:
+            os.system('cls')
+            print('Goodby!')
+            print('\a')
+
+
 y = Deck(x)
-PlayerCards = []
-print(PlayerCards)
-PlayerCards.append(y.add_cards())
-print(PlayerCards)
-PlayerCards = Deck(PlayerCards)
-sum = PlayerCards.sum_cards()
-print(sum)
-PlayerCards = y.choose_cards()
-print(PlayerCards)
+main()
+# PlayerCards = []
+# print(PlayerCards)
+# PlayerCards.append(y.add_cards())
+# print(PlayerCards)
+# PlayerCards = Deck(PlayerCards)
+# sum = PlayerCards.sum_cards()
+# print(sum)
+# PlayerCards = y.choose_cards()
+# print(PlayerCards)
+# PlayerCards = Deck(PlayerCards)
+# sum = PlayerCards.sum_cards()
+# print(sum)
 input('\nPress \'Enter\' for exit!')
