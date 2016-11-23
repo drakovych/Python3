@@ -42,25 +42,25 @@ class Deck(object):
     def sum_cards(self):
         x = 0
         for i in self.deck_cards:
-            if (i == '2C' or i == '2D' or i == '2H' or i == '2S' or i == 'JC' or i == 'JD' or i == 'JH' or i == 'JS'):
+            if i in ('2C', '2D', '2H', '2S', 'JC', 'JD', 'JH', 'JS'):
                 x += 2
-            if (i == '3C' or i == '3D' or i == '3H' or i == '3S' or i == 'QC' or i == 'QD' or i == 'QH' or i == 'QS'):
+            if i in ('3C', '3D', '3H', '3S', 'QC', 'QD', 'QH', 'QS'):
                 x += 3
-            if (i == '4C' or i == '4D' or i == '4H' or i == '4S' or i == 'KC' or i == 'KD' or i == 'KH' or i == 'KS'):
+            if i in ('4C', '4D', '4H', '4S', 'KC', 'KD', 'KH', 'KS'):
                 x += 4
-            if (i == '5C' or i == '5D' or i == '5H' or i == '5S'):
+            if i in ('5C', '5D', '5H', '5S'):
                 x += 5
-            if (i == '6C' or i == '6D' or i == '6H' or i == '6S'):
+            if i in ('6C', '6D', '6H', '6S'):
                 x += 6
-            if (i == '7C' or i == '7D' or i == '7H' or i == '7S'):
+            if i in ('7C', '7D', '7H', '7S'):
                 x += 7
-            if (i == '8C' or i == '8D' or i == '8H' or i == '8S'):
+            if i in ('8C', '8D', '8H', '8S'):
                 x += 8
-            if (i == '9C' or i == '9D' or i == '9H' or i == '9S'):
+            if i in ('9C', '9D', '9H', '9S'):
                 x += 9
-            if (i == '10C' or i == '10D' or i == '10H' or i == '10S'):
+            if i in ('10C', '10D', '10H', '10S'):
                 x += 10
-            if (i == 'AC' or i == 'AD' or i == 'AH' or i == 'AS'):
+            if i in ('AC', 'AD', 'AH', 'AS'):
                 x += 11
         return x
 
