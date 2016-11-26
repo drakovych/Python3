@@ -1,6 +1,6 @@
 # Card game 21
 import random
-#import os
+import os
 
 x = ['2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', '10C',
      'JC', 'QC', 'KC', 'AC',
@@ -91,24 +91,29 @@ class Deck(object):
                 return who_win_check
 
 
-def game_21():
+def game_menu():
     y = Deck(x)
-    score = [0, 0]
     PlayerCards = y.choose_cards()
     CompCards = y.choose_cards()
-    choise = input('Your choice : ')
+    choise = 0
     while choise != 2:
         print('\n1 - Start Game.\n2 - Exit.')
+        choise = input('Your choice : ')
         if choise == 1:
+            game_21()
         if choise == 2:
             os.system('cls')
             print('Goodby!')
             print('\a')
             
 
+def game_21():
+    pass
+
+
 PlayerCards = []
 CompCards = []
-game_21()
+game_menu()
 
 
 input('\nPress \'Enter\' for exit!')
