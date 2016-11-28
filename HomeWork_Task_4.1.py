@@ -164,16 +164,4 @@ def main():
 
 y = Deck(x)
 main()
-# PlayerCards = []
-# print(PlayerCards)
-# PlayerCards.append(y.add_cards())
-# print(PlayerCards)
-# PlayerCards = Deck(PlayerCards)
-# sum = PlayerCards.sum_cards()
-# print(sum)
-# PlayerCards = y.choose_cards()
-# print(PlayerCards)
-# PlayerCards = Deck(PlayerCards)
-# sum = PlayerCards.sum_cards()
-# print(sum)
 input('\nPress \'Enter\' for exit!')
