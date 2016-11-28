@@ -91,29 +91,32 @@ class Deck(object):
                 return who_win_check
 
 
+def game_21():
+    os.system('cls')
+    print(PlayerCards)
+    print(CompCards)
+    input('\nPress \'Enter\' for exit!')
+
+
 def game_menu():
-    y = Deck(x)
-    PlayerCards = y.choose_cards()
-    CompCards = y.choose_cards()
-    choise = 0
-    while choise != 2:
-        print('\n1 - Start Game.\n2 - Exit.')
-        choise = input('Your choice : ')
-        if choise == 1:
+    print('\n1 - Start Game.\n2 - Exit.')
+    choice = input('\nYour choice : ')
+    while choice != '2':
+        # os.system('cls')
+        if choice == 1:
             game_21()
-        if choise == 2:
+        if choice == '2':
             os.system('cls')
             print('Goodby!')
             print('\a')
-            
-
-def game_21():
-    pass
 
 
-PlayerCards = []
-CompCards = []
+# PlayerCards = []
+# CompCards = []
+y = Deck(x)
+PlayerCards = y.choose_cards()
+CompCards = y.choose_cards()
+#game_21()
 game_menu()
-
 
 input('\nPress \'Enter\' for exit!')
