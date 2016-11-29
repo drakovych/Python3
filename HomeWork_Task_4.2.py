@@ -118,19 +118,19 @@ def game_21():
         if answer == 'yes':
             PlayerCards.append(deck_in_game.add_cards())
             player_cards_hand = Deck(PlayerCards)
-            player_cards_hand.sum_player_cards_check()
+            player_cards_hand.sum_player_cards_check()# Exit
             CompCards.append(deck_in_game.add_cards())
             comp_cards_hand = Deck(CompCards)
-            comp_cards_hand.sum_comp_cards_check()
+            if comp_cards_hand.sum_cards() < 19:
+                comp_cards_hand.sum_comp_cards_check()# Exit
         player_cards_hand.print_cards_sum(PlayerCards)
         answer = input('\nYou want to take an additional card (yes/no)? : ')
     else:
         while comp_cards_hand.sum_cards() < 19:
             CompCards.append(deck_in_game.add_cards())
             comp_cards_hand = Deck(CompCards)
-            comp_cards_hand.sum_comp_cards_check()
-        if (comp_cards_hand.sum_cards and player_cards_hand.sum_cards()) < 21:
-            who_win_check(PlayerCards, CompCards)
+            comp_cards_hand.sum_comp_cards_check()# Exit
+    who_win_check(PlayerCards, CompCards)
 
 
 def game_menu():
