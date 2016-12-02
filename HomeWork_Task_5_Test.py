@@ -1,19 +1,11 @@
 
-def func(first):
-    foo = first * 2
-    def func2(second):
-        # nonlocal foo
-        return second * 10
+def func1(one):
+    one = one * 3
+    def func2(two):
+        return two + one
     return func2
-    def func3(third):
-        return foo // 3
-    return func3
 
-
-x = func('foo')
-y = x(10)
-# z = x.func.func3(100)
-
-print(x)
-
+func = func1(2)
+y = func(10)
+print(func)
 print(y)

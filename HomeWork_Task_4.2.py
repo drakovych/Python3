@@ -69,17 +69,21 @@ class Deck(object):
         if self.sum_cards() > 21:
             score[1] += 1
             print('\nComp Win! Player have cards sum > 21.')
+            return True
         elif self.sum_cards() == 21:
             score[0] += 1
             print('\nPlayer Win! Player have cards sum = 21.')
+            return True
 
     def sum_comp_cards_check(self):
         if self.sum_cards() > 21:
             score[0] += 1
             print('\nPlayer Win! Comp have cards sum > 21.')
+            return True
         elif self.sum_cards() == 21:
             score[1] += 1
             print('\nComp Win! Comp have cards sum = 21.')
+            return True
 
     def print_cards_sum(self, PlayerCards):
         print('\nPlayer score : ', score[0], '\tComp score : ', score[1])
@@ -88,21 +92,21 @@ class Deck(object):
 
 
 def who_win_check(PlayerCards, CompCards):
-        sum_cp = Deck(PlayerCards)
-        sum_cc = Deck(CompCards)
-        if (sum_cp.sum_cards() and sum_cc.sum_cards()) < 21:
-            if sum_cp.sum_cards() > sum_cc.sum_cards():
-                score[0] += 1
-                print('\nPlayer score : ', score[0],
-                      '\tComp score : ', score[1])
-                print('\nPlayer Win! Player have cards sum more.')
-            if sum_cp.sum_cards() < sum_cc.sum_cards():
-                score[1] += 1
-                print('\nPlayer score : ', score[0],
-                      '\tComp score : ', score[1])
-                print('\nComp Win! Comp have cards sum more.')
-            if sum_cp.sum_cards() == sum_cc.sum_cards():
-                print('\nNo winner, draw. Sum cards equal.')
+    sum_cp = Deck(PlayerCards)
+    sum_cc = Deck(CompCards)
+    if (sum_cp.sum_cards() or sum_cc.sum_cards()) < 21:
+        if sum_cp.sum_cards() > sum_cc.sum_cards():
+            score[0] += 1
+            print('\nPlayer score : ', score[0],
+                  '\tComp score : ', score[1])
+            print('\nPlayer Win! Player have cards sum more.')
+        if sum_cp.sum_cards() < sum_cc.sum_cards():
+            score[1] += 1
+            print('\nPlayer score : ', score[0],
+                  '\tComp score : ', score[1])
+            print('\nComp Win! Comp have cards sum more.')
+        if sum_cp.sum_cards() == sum_cc.sum_cards():
+            print('\nNo winner, draw. Sum cards equal.')
 
 
 def game_21():
@@ -118,18 +122,21 @@ def game_21():
         if answer == 'yes':
             PlayerCards.append(deck_in_game.add_cards())
             player_cards_hand = Deck(PlayerCards)
-            player_cards_hand.sum_player_cards_check()# Exit
-            CompCards.append(deck_in_game.add_cards())
-            comp_cards_hand = Deck(CompCards)
+            if player_cards_hand.sum_player_cards_check() == True:
+                break
             if comp_cards_hand.sum_cards() < 19:
-                comp_cards_hand.sum_comp_cards_check()# Exit
+                CompCards.append(deck_in_game.add_cards())
+                comp_cards_hand = Deck(CompCards)
+                if comp_cards_hand.sum_comp_cards_check() == True:
+                    break
         player_cards_hand.print_cards_sum(PlayerCards)
         answer = input('\nYou want to take an additional card (yes/no)? : ')
     else:
         while comp_cards_hand.sum_cards() < 19:
             CompCards.append(deck_in_game.add_cards())
             comp_cards_hand = Deck(CompCards)
-            comp_cards_hand.sum_comp_cards_check()# Exit
+            if comp_cards_hand.sum_comp_cards_check() == True:
+                break
     who_win_check(PlayerCards, CompCards)
 
 
