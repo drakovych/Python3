@@ -100,18 +100,18 @@ def who_win_check(PlayerCards, CompCards):
             print('\nPlayer score : ', score[0],
                   '\tComp score : ', score[1])
             print('\nPlayer Win! Player have cards sum more.')
-        if sum_cp.sum_cards() < sum_cc.sum_cards():
+        elif sum_cp.sum_cards() < sum_cc.sum_cards():
             score[1] += 1
             print('\nPlayer score : ', score[0],
                   '\tComp score : ', score[1])
             print('\nComp Win! Comp have cards sum more.')
-        if sum_cp.sum_cards() == sum_cc.sum_cards():
+        elif sum_cp.sum_cards() == sum_cc.sum_cards():
             print('\nNo winner, draw. Sum cards equal.')
 
 
 def game_21():
     os.system('cls')
-    deck_in_game = Deck(x)
+    deck_in_game = Deck(x, selected_cards_check=[])
     PlayerCards = deck_in_game.choose_cards()
     player_cards_hand = Deck(PlayerCards)
     CompCards = deck_in_game.choose_cards()
