@@ -1,6 +1,6 @@
 import random
 import os
-from game_winner_map import winner_map, choice_map, choice_show
+from game_winner_map import *
 
 
 class rock_paper_scissors(object):
@@ -26,20 +26,13 @@ class rock_paper_scissors(object):
 
     def round(self):
         self.x = None
-        while True:
+        while self.x not in self.vibir:
             try:
                 self.x = int(input('Ваш выбор : '))
             except (TypeError, ValueError):
                 print('Это не целое число')
-            while self.x not in self.vibir:
-                os.system('cls')
-                print('Вы не выбрали число!')
-                try:
-                    self.x = int(input('Ваш выбор : '))
-                except (TypeError, ValueError):
-                    print('Это не целое число')
-            self.y = random.choice(self.vibir)
-            return
+        self.y = random.choice(self.vibir)
+        return
 
     def get_check_winner(self):
         self.round()
