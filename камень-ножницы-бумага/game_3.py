@@ -14,12 +14,17 @@ class rock_paper_scissors(object):
 
     def game_menu(self):
         choice = 0
-        while choice != '2':
-            print('\n1 - Начать игру.\n2 - Выйти.')
+        while choice != '3':
+            print('\n1 - Начать игру.\n2 - Правила\n3 - Выйти.')
             choice = input('\nВаш выбор : ')
             if choice == '1':
                 self.main_game()
             if choice == '2':
+                with open('Rules.txt') as f:
+                    print(f.read())
+                input('\nтыкни \'Enter\' для продолжения')
+                os.system('cls')
+            if choice == '3':
                 os.system('cls')
                 print('Пока!')
                 print('\a')
