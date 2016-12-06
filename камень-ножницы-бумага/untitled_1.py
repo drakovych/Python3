@@ -7,9 +7,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(303, 302)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QtCore.QRect(10, 70, 82, 17))
-        self.radioButton.setObjectName("radioButton")
+        self.radioButton_1 = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton_1.setGeometry(QtCore.QRect(10, 70, 82, 17))
+        self.radioButton_1.setObjectName("radioButton_1")
         self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_2.setGeometry(QtCore.QRect(10, 90, 82, 17))
         self.radioButton_2.setObjectName("radioButton_2")
@@ -112,7 +112,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow",
                                              "Rock Paper Scissors"))
-        self.radioButton.setText(_translate("MainWindow", "Камень"))
+        self.radioButton_1.setText(_translate("MainWindow", "Камень"))
         self.radioButton_2.setText(_translate("MainWindow", "Огонь"))
         self.radioButton_3.setText(_translate("MainWindow", "Ножницы"))
         self.radioButton_4.setText(_translate("MainWindow", "Змея"))
@@ -143,6 +143,10 @@ class Ui_MainWindow(object):
         self.lcdNumber_2.display(lose)
         self.lcdNumber_3.display(nowin)
 
+    def get_textchoice(self):
+        self.lineEdit.setText('Камень')
+        self.lineEdit_2.setText('ХаХаХа')
+
 
 if __name__ == "__main__":
     import sys
@@ -150,6 +154,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui.showLCD(12, 45, 1)
     MainWindow.show()
+    ui.showLCD(12, 45, 1)
+    ui.get_textchoice()
     sys.exit(app.exec_())
