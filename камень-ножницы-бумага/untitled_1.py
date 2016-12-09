@@ -1,7 +1,22 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+import random
+
+from PyQt5 import QtCore
+# from PyQt5 import QtGui
+from PyQt5 import QtWidgets
+
+from game_winner_map import *
 
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        self.vibir = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        self.x = None
+        self.y = None
+        self.win = 0
+        self.lose = 0
+        self.nowin = 0
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(303, 302)
@@ -10,48 +25,63 @@ class Ui_MainWindow(object):
         self.radioButton_1 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_1.setGeometry(QtCore.QRect(10, 70, 82, 17))
         self.radioButton_1.setObjectName("radioButton_1")
+        self.radioButton_1.toggled.connect(self.get_radio1_clicked)
         self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_2.setGeometry(QtCore.QRect(10, 90, 82, 17))
         self.radioButton_2.setObjectName("radioButton_2")
+        self.radioButton_2.toggled.connect(self.get_radio2_clicked)
         self.radioButton_3 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_3.setGeometry(QtCore.QRect(10, 110, 82, 17))
         self.radioButton_3.setObjectName("radioButton_3")
+        self.radioButton_3.toggled.connect(self.get_radio3_clicked)
         self.radioButton_4 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_4.setGeometry(QtCore.QRect(10, 130, 82, 17))
         self.radioButton_4.setObjectName("radioButton_4")
+        self.radioButton_4.toggled.connect(self.get_radio4_clicked)
         self.radioButton_5 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_5.setGeometry(QtCore.QRect(10, 150, 82, 17))
         self.radioButton_5.setObjectName("radioButton_5")
+        self.radioButton_5.toggled.connect(self.get_radio5_clicked)
         self.radioButton_6 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_6.setGeometry(QtCore.QRect(120, 70, 82, 17))
         self.radioButton_6.setObjectName("radioButton_6")
+        self.radioButton_6.toggled.connect(self.get_radio6_clicked)
         self.radioButton_7 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_7.setGeometry(QtCore.QRect(120, 90, 82, 17))
         self.radioButton_7.setObjectName("radioButton_7")
+        self.radioButton_7.toggled.connect(self.get_radio7_clicked)
         self.radioButton_8 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_8.setGeometry(QtCore.QRect(120, 110, 82, 17))
         self.radioButton_8.setObjectName("radioButton_8")
+        self.radioButton_8.toggled.connect(self.get_radio8_clicked)
         self.radioButton_9 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_9.setGeometry(QtCore.QRect(120, 130, 82, 17))
         self.radioButton_9.setObjectName("radioButton_9")
+        self.radioButton_9.toggled.connect(self.get_radio9_clicked)
         self.radioButton_10 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_10.setGeometry(QtCore.QRect(120, 150, 82, 17))
         self.radioButton_10.setObjectName("radioButton_10")
+        self.radioButton_10.toggled.connect(self.get_radio10_clicked)
         self.radioButton_11 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_11.setGeometry(QtCore.QRect(220, 70, 82, 17))
         self.radioButton_11.setObjectName("radioButton_11")
+        self.radioButton_11.toggled.connect(self.get_radio11_clicked)
         self.radioButton_12 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_12.setGeometry(QtCore.QRect(220, 90, 82, 17))
         self.radioButton_12.setObjectName("radioButton_12")
+        self.radioButton_12.toggled.connect(self.get_radio12_clicked)
         self.radioButton_13 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_13.setGeometry(QtCore.QRect(220, 110, 82, 17))
         self.radioButton_13.setObjectName("radioButton_13")
+        self.radioButton_13.toggled.connect(self.get_radio13_clicked)
         self.radioButton_14 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_14.setGeometry(QtCore.QRect(220, 130, 82, 17))
         self.radioButton_14.setObjectName("radioButton_14")
+        self.radioButton_14.toggled.connect(self.get_radio14_clicked)
         self.radioButton_15 = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButton_15.setGeometry(QtCore.QRect(220, 150, 82, 17))
         self.radioButton_15.setObjectName("radioButton_15")
+        self.radioButton_15.toggled.connect(self.get_radio15_clicked)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(0, 167, 301, 16))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
@@ -65,12 +95,15 @@ class Ui_MainWindow(object):
         self.lcdNumber = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcdNumber.setGeometry(QtCore.QRect(60, 30, 64, 23))
         self.lcdNumber.setObjectName("lcdNumber")
+        self.lcdNumber.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
         self.lcdNumber_2 = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcdNumber_2.setGeometry(QtCore.QRect(140, 30, 64, 23))
         self.lcdNumber_2.setObjectName("lcdNumber_2")
+        self.lcdNumber_2.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
         self.lcdNumber_3 = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcdNumber_3.setGeometry(QtCore.QRect(220, 30, 64, 23))
         self.lcdNumber_3.setObjectName("lcdNumber_3")
+        self.lcdNumber_3.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(8, 10, 301, 16))
         self.label.setObjectName("label")
@@ -83,6 +116,7 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(110, 240, 81, 23))
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.handleButton)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(10, 180, 281, 20))
         self.label_2.setObjectName("label_2")
@@ -129,7 +163,7 @@ class Ui_MainWindow(object):
         self.radioButton_15.setText(_translate("MainWindow", "Пистолет"))
         self.label.setText(_translate(
             "MainWindow", "Score:   \
-            Your                   Comp                 NoWin"))
+            YourWin            CompWin                NoWin"))
         self.pushButton.setText(_translate("MainWindow", "Начать"))
         self.label_2.setText(_translate(
             "MainWindow", "        Вы выбрали\
@@ -143,18 +177,127 @@ class Ui_MainWindow(object):
         self.lcdNumber_2.display(lose)
         self.lcdNumber_3.display(nowin)
 
-    def get_textchoice(self):
-        self.lineEdit.setText('Камень')
-        self.lineEdit_2.setText('ХаХаХа')
+    def handleButton(self):
+        self.y = self.get_comp_choose()
+        self.lineEdit_2.setText(choice_map[self.y])
+        self.get_check_winner()
+        self.showLCD(self.win, self.lose, self.nowin)
+        # return self.y
+
+    def get_radio1_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Камень')
+            self.x = 1
+            return
+
+    def get_radio2_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Огонь')
+            self.x = 2
+            return
+
+    def get_radio3_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Ножницы')
+            self.x = 3
+            return
+
+    def get_radio4_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Змея')
+            self.x = 4
+            return
+
+    def get_radio5_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Человек')
+            self.x = 5
+            return
+
+    def get_radio6_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Дерево')
+            self.x = 6
+            return
+
+    def get_radio7_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Волк')
+            self.x = 7
+            return
+
+    def get_radio8_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Губка')
+            self.x = 8
+            return
+
+    def get_radio9_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Бумага')
+            self.x = 9
+            return
+
+    def get_radio10_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Воздух')
+            self.x = 10
+            return
+
+    def get_radio11_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Вода')
+            self.x = 11
+            return
+
+    def get_radio12_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Дракон')
+            self.x = 12
+            return
+
+    def get_radio13_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Дьявол')
+            self.x = 13
+            return
+
+    def get_radio14_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Молния')
+            self.x = 14
+            return
+
+    def get_radio15_clicked(self, enabled):
+        if enabled:
+            self.lineEdit.setText('Пистолет')
+            self.x = 15
+            return
+
+    def get_comp_choose(self):
+        self.y = random.choice(self.vibir)
+        return self.y
+
+    def get_check_winner(self):
+        if self.x == self.y:
+            self.nowin += 1
+            return 'nowin'
+        for arg1, arg2 in winner_map.items():
+            if self.x == arg1:
+                for x in arg2:
+                    if x == self.y:
+                        self.win += 1
+                        return 'win'
+        self.lose += 1
+        return 'lose'
+
+    def get_lcd_number(self):
+        ui.showLCD(self.win, self.lose, self.nowin)
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    ui.showLCD(12, 45, 1)
-    ui.get_textchoice()
-    sys.exit(app.exec_())
+app = QtWidgets.QApplication(sys.argv)
+MainWindow = QtWidgets.QMainWindow()
+ui = Ui_MainWindow()
+ui.setupUi(MainWindow)
+MainWindow.show()
+sys.exit(app.exec_())

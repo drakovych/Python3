@@ -85,15 +85,15 @@ class Deck(object):
             print('\nComp Win! Comp have cards sum = 21.')
             return True
 
-    def print_cards_sum(self, PlayerCards):
+    def print_cards_sum(self, player_card):
         print('\nPlayer score : ', score[0], '\tComp score : ', score[1])
-        print('\nPlayer have the cards : ', PlayerCards,
+        print('\nPlayer have the cards : ', player_card,
               '\nTheir sum : ', self.sum_cards())
 
 
-def who_win_check(PlayerCards, CompCards):
-    sum_cp = Deck(PlayerCards)
-    sum_cc = Deck(CompCards)
+def who_win_check(player_card, comp_card):
+    sum_cp = Deck(player_card)
+    sum_cc = Deck(comp_card)
     if (sum_cp.sum_cards() or sum_cc.sum_cards()) < 21:
         if sum_cp.sum_cards() > sum_cc.sum_cards():
             score[0] += 1
@@ -112,32 +112,32 @@ def who_win_check(PlayerCards, CompCards):
 def game_21():
     os.system('cls')
     deck_in_game = Deck(x, selected_cards_check=[])
-    PlayerCards = deck_in_game.choose_cards()
-    player_cards_hand = Deck(PlayerCards)
-    CompCards = deck_in_game.choose_cards()
-    comp_cards_hand = Deck(CompCards)
-    player_cards_hand.print_cards_sum(PlayerCards)
+    player_card = deck_in_game.choose_cards()
+    player_cards_hand = Deck(player_card)
+    comp_card = deck_in_game.choose_cards()
+    comp_cards_hand = Deck(comp_card)
+    player_cards_hand.print_cards_sum(player_card)
     answer = input('\nYou want to take an additional card (yes/no)? : ')
     while answer == 'yes':
         if answer == 'yes':
-            PlayerCards.append(deck_in_game.add_cards())
-            player_cards_hand = Deck(PlayerCards)
+            player_card.append(deck_in_game.add_cards())
+            player_cards_hand = Deck(player_card)
             if player_cards_hand.sum_player_cards_check() == True:
                 break
             if comp_cards_hand.sum_cards() < 19:
-                CompCards.append(deck_in_game.add_cards())
-                comp_cards_hand = Deck(CompCards)
+                comp_card.append(deck_in_game.add_cards())
+                comp_cards_hand = Deck(comp_card)
                 if comp_cards_hand.sum_comp_cards_check() == True:
                     break
-        player_cards_hand.print_cards_sum(PlayerCards)
+        player_cards_hand.print_cards_sum(player_card)
         answer = input('\nYou want to take an additional card (yes/no)? : ')
     else:
         while comp_cards_hand.sum_cards() < 19:
-            CompCards.append(deck_in_game.add_cards())
-            comp_cards_hand = Deck(CompCards)
+            comp_card.append(deck_in_game.add_cards())
+            comp_cards_hand = Deck(comp_card)
             if comp_cards_hand.sum_comp_cards_check() == True:
                 break
-    who_win_check(PlayerCards, CompCards)
+    who_win_check(player_card, comp_card)
 
 
 def game_menu():
