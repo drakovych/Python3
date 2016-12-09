@@ -94,7 +94,7 @@ class Deck(object):
 def who_win_check(player_card, comp_card):
     sum_cp = Deck(player_card)
     sum_cc = Deck(comp_card)
-    if (sum_cp.sum_cards() or sum_cc.sum_cards()) < 21:
+    if (sum_cp.sum_cards() and sum_cc.sum_cards()) < 21:
         if sum_cp.sum_cards() > sum_cc.sum_cards():
             score[0] += 1
             print('\nPlayer score : ', score[0],
