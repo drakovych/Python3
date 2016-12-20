@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName('MainWindow')
-        MainWindow.resize(303, 302)
+        MainWindow.resize(305, 305)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName('centralwidget')
         self.radioButton_1 = QtWidgets.QRadioButton(self.centralwidget)
@@ -197,32 +197,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         help_window.setWindowTitle(_translate('help_window', 'Help'))
         self.pushButton.setText(_translate('help_window', 'Close'))
-        # str111 = str(self.rules_str())
-        # self.label.setText(str111)
-        self.label.setText(_translate('help_window',
-'Камень побеждает: Огонь, Ножницы, Змею, Человека, Дерево, Волка, Губку.\n\n'
-'Огонь побеждает: Ножницы, Змею, Человека, Дерево, Волка, Губку, Бумагу.\n\n'
-'Ножницы побеждают: Змею, Человека, Дерево, Волка, Губку, Бумагу, Воздух.\n\n'
-'Змея побеждает: Человека, Дерево, Волка, Губку, Бумагу, Воздух, Воду.\n\n'
-'Человек побеждает: Дерево, Волка, Губку, Бумагу, Воздух, Воду, Дракона.\n\n'
-'Дерево побеждает: Волка, Губку, Бумагу, Воздух, Воду, Дракона, Дьявола.\n\n'
-'Волк побеждает: Губку, Бумагу, Воздух, Воду, Дракона, Дьявола, Молнию.\n\n'
-'Губка побеждает: Бумагу, Воздух, Воду, Дракона, Дьявола, Молнию, Пистолет.\n\n'
-'Бумага побеждает: Воздух, Воду, Дракона, Дьявола, Молнию, Пистолет, Камень.\n\n'
-'Воздух побеждает: Воду, Дракона, Дьявола, Молнию, Пистолет, Камень, Огонь.\n\n'
-'Вода побеждает: Дракона, Дьявола, Молнию, Пистолет, Камень, Огонь, Ножницы.\n\n'
-'Дракон побеждает: Дьявола, Молнию, Пистолет, Камень, Огонь, Ножницы, Змею.\n\n'
-'Дьявол побеждает: Молнию, Пистолет, Камень, Огонь, Ножницы, Змею, Человека.\n\n'
-'Молния побеждает: Пистолет, Камень, Огонь, Ножницы, Змею, Человека, Дерево.\n\n'
-'Пистолет побеждает: Камень, Огонь, Ножницы, Змею, Человека, Дерево, Волка.'))
-
-    # def rules_str(self):
-    #     z = ''
-    #     for key, value in rules.items():
-    #         for y in value:
-    #             z = z + y + ' '
-    #         x = str(print(key, ' : ', z))
-    #         z = ''
+        self.label.setText(_translate('help_window', help_string))
 
     def close_button(self):
         help_window.close()
@@ -235,16 +210,29 @@ class Ui_MainWindow(object):
         help_window.show()
 
     def showLCD(self, win, lose, nowin):
+        """Set score in LCD"""
+
         self.lcdNumber.display(win)
         self.lcdNumber_2.display(lose)
         self.lcdNumber_3.display(nowin)
 
     def handleButton(self):
+        """ Begin game
+            1. Check player choice
+            2. Set comp choose
+            3. Check who win
+            4. Display score
+        """
+
         if self.x != None:
             self.y = self.get_comp_choose()
             self.lineEdit_2.setText(choice_map[self.y])
             self.get_check_winner()
             self.showLCD(self.win, self.lose, self.nowin)
+
+    def set_btnstate(self, state):
+        if state == True:
+            self.radiobutton_1.setChecked(False)
 
     def get_radio1_clicked(self, enabled):
         if enabled:
@@ -337,10 +325,14 @@ class Ui_MainWindow(object):
             return
 
     def get_comp_choose(self):
+        """ Select what choose comp """
+
         self.y = random.choice(self.vibir)
         return self.y
 
     def get_check_winner(self):
+        """Check how win"""
+
         if self.x == self.y:
             self.nowin += 1
             return 'nowin'
@@ -353,14 +345,12 @@ class Ui_MainWindow(object):
         self.lose += 1
         return 'lose'
 
-    def get_lcd_number(self):
-        ui.showLCD(self.win, self.lose, self.nowin)
 
-
-app = QtWidgets.QApplication(sys.argv)
-MainWindow = QtWidgets.QMainWindow()
-help_window = QtWidgets.QWidget()
-ui = Ui_MainWindow()
-ui.setupUi(MainWindow)
-MainWindow.show()
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    help_window = QtWidgets.QWidget()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec())
